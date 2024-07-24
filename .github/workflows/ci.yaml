@@ -68,7 +68,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-web-app:${{github.run_id}}    #pushing the new docker image with new tag to dockerhub..{{github.run_id}} means whenever new docker image is pushed to docker hub cretae a new tag for that new docker image
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-web-app:${{ github.run_id }}    #pushing the new docker image with new tag to dockerhub..{{github.run_id}} means whenever new docker image is pushed to docker hub cretae a new tag for that new docker image
 
   update-newtag-in-helm-chart:
     runs-on: ubuntu-latest
@@ -83,7 +83,7 @@ jobs:
 
     - name: Update tag in Helm chart   #first its searches for name tag in values.yaml using sed command and it will update the tag field in values.yaml(helm\go-webapp-chart\values.yaml) with new docker image tag created by (github.run_id)
       run: |
-        sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-web-app-chart/values.yaml        
+        sed -i 's/tag: .*/tag: "${{ github.run_id }}"/' helm/go-web-app-chart/values.yaml        
 
     - name: Commit and push changes          #once the tag is updated in values.yaml..we need to push the changes in to github
       run: |
