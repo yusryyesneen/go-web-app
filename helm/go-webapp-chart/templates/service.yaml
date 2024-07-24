@@ -1,0 +1,16 @@
+#service for the application
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-webapp
+  labels:
+    app: go-webapp
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080      #target port has to be the container port that you expose
+  selector:                 #most important thing in the service is selector..This selector has to match with the label you provided in pod specification in deployment file. 
+      app: go-webapp
+  type: ClusterIP
+      

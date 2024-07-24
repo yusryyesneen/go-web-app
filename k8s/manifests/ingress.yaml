@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: go-webapp
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx   #ingress class name is for the ingress resource that need to be identified by ingress controller. In organization there can be multiple ingress contollers..Ingress resource inside k8 cluster needs to be indetified by those ingress contollers..So using ingress class name we tell the ingress contoller this is the ingress resource we have to watch for. 
+  rules:
+  - host: go-web-app.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: go-webapp
+            port:
+              number: 80
+  

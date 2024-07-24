@@ -1,0 +1,22 @@
+#Deployment manifest file for go-web-application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-webapp
+  labels:                     #labels that assigned to the pod
+    app: go-webapp            #labels that assigned to the pod
+spec:                         #Pod specification section starts from here in deployment
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-webapp
+  template:
+    metadata:
+     labels:                  #label that assigned to the pod
+        app: go-webapp         #label that assigned to the pod...We need to make sure we provide the same label name in the selector of the service beause k8 service discovery happens through labels and selectors.
+    spec:
+      containers:
+      - name: go-webapp
+        image: yusrygtx25/go-web-app:{{ .Values.image.tag }}
+        ports:
+        - containerPort: 8080
