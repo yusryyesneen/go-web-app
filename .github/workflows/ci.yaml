@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest      #these actions runs in ubuntu virtual machine
 
     steps:
-    - name: Checkout repository  #clone the repo inside the 
+    - name: Checkout repository  #clone the repo inside the machine
       uses: actions/checkout@v4
 
     - name: Set up Go 1.22
@@ -87,8 +87,8 @@ jobs:
 
     - name: Commit and push changes          #once the tag is updated in values.yaml..we need to push the changes in to github
       run: |
-        git config --global user.email "abhishek@gmail.com"
-        git config --global user.name "Abhishek Veeramalla"      
+        git config --global user.email "kevin.mendis2@gmail.com"
+        git config --global user.name "Yusry Yesneen"      
         git add helm/go-web-app-chart/values.yaml
         git commit -m "Update tag in Helm chart"
         git push
